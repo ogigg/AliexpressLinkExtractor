@@ -1,6 +1,7 @@
 export const CHANGE_TBXUPPER = 'CHANGE_TBXUPPER'
 export const CHANGE_TBXLOWER = 'CHANGE_TBXLOWER'
 export const FIX_IT = 'FIX_IT'
+export const CLEAR = 'CLEAR'
 
 
 /*
@@ -25,6 +26,9 @@ export function textBoxLowerChange(text) {
   }
 export function btnClicked() {
     return { type: FIX_IT }
+  }
+export function clear() {
+    return { type: CLEAR }
   }
 
 // export function addTodo(text) {

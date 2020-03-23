@@ -49,12 +49,21 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
 
     
     const copyToClipboard = () => {
-        const textField = document.createElement('textarea');
-        textField.innerText = textAreaRef.current.state.value;
-        document.body.appendChild(textField);
-        textField.select();
-        document.execCommand('copy');
-        textField.remove();
+        
+        let textToCopy = textAreaRef.current.state.value;
+        if(textToCopy.length>0){
+            const textField = document.createElement('textarea');
+            textField.innerText = textToCopy;
+            document.body.appendChild(textField);
+            textField.select();
+            document.execCommand('copy');
+            textField.remove();
+            openNotification('Copied successfully');
+        }
+        else{
+            openNotification('Nothing to copy!');
+        }
+        
       };
 
     return(
@@ -65,9 +74,9 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                 <Col flex={1} >
                     <PageHeader 
                         title = "Aliexpress Link Fixer" 
-                        subTitle="Just paste ugly aliexpress link and get beautiful one! "
+                        subTitle="Just paste ugly aliexpress link and get beautiful one! Works for trashy links and links from app"
                         extra = {
-                        <a href = 'https://github.com/ogigg'><GithubOutlined /></a>                        }
+                        <a href = 'https://github.com/ogigg/AliexpressLinkExtractor'><GithubOutlined/></a>}
                     />
                 </Col>
                 </Row>
@@ -85,7 +94,8 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                 <Row justify="center">
                     <Col span={18} >
                         <div class = "textArea-wrapper" >
-                            <Button block type="primary" 
+                            <Button block type="primary"
+                            styles = {{whiteSpace: 'normal', wordWrap:' break-word'}} 
                             onClick = {e => handleClick()} >Fix it!</Button>
                         </div>
                     </Col>
@@ -100,7 +110,7 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                     <Col span={3}>
                         <div class = "textArea-wrapper" >
                             <Button block 
-                            onClick = {e => {copyToClipboard(); openNotification('Copied successfully'); }}
+                            onClick = {e => {copyToClipboard();  }}
                             // onClick={ (e) =>  openNotification('Copied successfully')}
                             >
                                 Copy It!
@@ -132,17 +142,66 @@ const fixLinks = (input) => {
     let regexp = /aliexpress\.com\/item\/\d+\.html/g;
     // var linksFoundArray = input.matchAll(regexp);
     let linksFoundArray = [...input.matchAll(regexp)];
-    var returnedString = "";
-    console.log(linksFoundArray);
+    regexp = /.\.aliexpress\.com\/\_.+/g;
+    let shareLinksFoundArray = [...input.matchAll(regexp)]; //share link looks like that https://a.aliexpress.com/_d9leh4R
+    
+    let returnedString = "";
+    let shareLinksString = "";
+    console.log(shareLinksFoundArray);
  
     linksFoundArray.map(link => {
         returnedString = returnedString + "https://www." + link[0] + '\n';
         console.log(link[0]);
     })
-    
+    const promises = shareLinksFoundArray.map(async link => {
+        const url = await getUrlFromSharedLink("https://cors-anywhere.herokuapp.com/https://"+ link);
+        return url;
+    })
+    console.log(promises)
+    promises.map(async promise => {
+        const url = await promise;
+        console.log(url);
+        shareLinksString = shareLinksString + "https://" + url + '\n';
+        store.dispatch(textBoxLowerChange(returnedString + shareLinksString));
+        // returnedString=returnedString+'\n'+url;
+
+    })
     return returnedString;
 }
 
+
+async function getUrlFromSharedLink(url) {
+    function createCORSRequest(method, url) {
+        var xhr = new XMLHttpRequest();
+        if ("withCredentials" in xhr) {
+        // XHR for Chrome/Firefox/Opera/Safari.
+        xhr.open(method, url, true);
+        } 
+        return xhr;
+    }
+      
+      // Helper method to parse the title tag from the response.
+    function getUrl(text) {
+        let regexp = /<meta property=.og:url. content=...(.*)?\?/g;
+        return regexp.exec(text)[1]
+    }
+    return new Promise(function (resolve, reject) {      
+        let xhr = createCORSRequest('GET', url);
+        console.log('starting cors rq')
+        // Response handlers.
+        let desiredUrl = ''
+        xhr.onload = function() {
+            var text = xhr.responseText;
+            desiredUrl = getUrl(text);
+            console.log("Funkcja pytajaca: " + desiredUrl)
+            resolve(desiredUrl);
+            return desiredUrl
+        };
+        xhr.send();
+    });
+      
+    //   return desiredUrl
+}
 
 const handleClick = () => {
     let inputUpper = store.getState().inputUpper;

@@ -113,7 +113,9 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
         LowerInput = (<Col flex={1}  >
             <div class = "textArea-wrapper" >
                 {inputLower.split('\n').map((text) => 
-                    <p><a href={text}>{text}</a></p>
+                    <p><a href={text} target="_blank">
+                        {text}
+                    </a></p>
                 )}
             </div>
         </Col>);

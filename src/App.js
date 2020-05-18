@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import { Provider } from 'react-redux'
 import store from './store'
 import HomePage from './Components/HomePage';
 import "antd/dist/antd.css";
+
+const TITLE = 'Aliexpress Link Fixer';
+
+
 // import {
 //   addTodo,
 //   toggleTodo,
@@ -29,9 +33,17 @@ function App() {
 
 // // Stop listening to state updates
 // unsubscribe()
+
+useEffect(() => {
+  document.title = TITLE
+}, []);
+
+
+
+
   return (
   <Provider store = {store}>
-
+    <title>{ TITLE }</title>
     <HomePage/>
     
   </Provider>

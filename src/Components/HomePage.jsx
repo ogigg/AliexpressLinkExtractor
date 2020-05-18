@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Layout, PageHeader, Breadcrumb, Button } from 'antd';
 
 import { Row, Col } from 'antd';
@@ -16,8 +16,12 @@ import {
     RadiusBottomleftOutlined,
     RadiusBottomrightOutlined,
     GithubOutlined,
+    QuestionCircleOutlined,
   } from '@ant-design/icons';
   
+import  InstructionModal  from './InstructionModal';
+import Cookies from 'js-cookie';
+import { Switch } from 'antd';
 
 const { TextArea } = Input;
 const Context = React.createContext({ name: 'Default' });
@@ -33,21 +37,41 @@ const unsubscribe = store.subscribe(
     )
 
 
+
 const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
 
-    const [api, contextHolder] = notification.useNotification();
-
+    
+    const [instructionDialog, setInstructionDialog] = useState(false);
+    const [textbox, setTextbox] = useState(true);
     const textAreaRef = useRef(null);
-
+    const [api, contextHolder] = notification.useNotification();
     const openNotification = text => {
         api.info({
-          message: text,
+            message: text,
         //   description: <Context.Consumer>{({ name }) => `Hello, ${name}!`}</Context.Consumer>,
-          placement: 'topRight',
+            placement: 'topRight',
         });
-      };
+        };
 
-    
+
+    useEffect(() => {
+
+        if(!Cookies.get('showInstruction')){ //if this is first visit on a page
+            Cookies.set('showInstruction', true);
+            console.log("Pokaz instrukcje");
+            showInstructions();
+        }
+        }, []);
+        
+    useEffect(() => {
+        console.log(instructionDialog)
+        setInstructionDialog(false);
+        }, [instructionDialog]);
+
+    const showInstructions = () => {
+        setInstructionDialog(true);
+
+    }
     const copyToClipboard = () => {
         
         let textToCopy = textAreaRef.current.state.value;
@@ -65,18 +89,55 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
         }
         
       };
+    const onChange = (e) => {
+        console.log(e);
+        setTextbox(e);
+    }
 
+
+    let LowerInput;
+    if(textbox){
+        LowerInput = (<Col flex={1}  >
+        <div class = "textArea-wrapper" >
+            
+             <TextArea  onChange={(e) => dispatch(textBoxLowerChange(e.target.value))} 
+                ref={textAreaRef}
+                value = {inputLower}   
+                autoSize={{ minRows: 5, maxRows: 15 }}
+            />
+            
+        </div>
+    </Col>)
+    }
+    else {
+        LowerInput = (<Col flex={1}  >
+            <div class = "textArea-wrapper" >
+                {inputLower.split('\n').map((text) => 
+                    <p><a href={text}>{text}</a></p>
+                )}
+            </div>
+        </Col>);
+    }
+
+    
     return(
     <Context.Provider value={{ name: 'Ant Design' }}> {contextHolder}
     <Row>
-        <Col flex={1}  class = "test" >
+        <InstructionModal open = {instructionDialog}></InstructionModal>
+        <Col flex={1}   >
             <Row justify="center" >
                 <Col flex={1} >
                     <PageHeader 
                         title = "Aliexpress Link Fixer" 
                         subTitle="Just paste ugly aliexpress link and get beautiful one! Works for trashy links and links from app"
                         extra = {
-                        <a href = 'https://github.com/ogigg/AliexpressLinkExtractor'><GithubOutlined/></a>}
+                        <div >
+                            <QuestionCircleOutlined className = "icon" 
+                            onClick = {showInstructions}/>
+                            <a href = 'https://github.com/ogigg/AliexpressLinkExtractor' className = "icon"><GithubOutlined/></a>
+
+                        </div>
+                        }
                     />
                 </Col>
                 </Row>
@@ -91,8 +152,8 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                 </Col>
                 </Row>
 
-                <Row justify="center">
-                    <Col span={18} >
+                <Row justify="center" align="middle">
+                    <Col span={15} >
                         <div class = "textArea-wrapper" >
                             <Button block type="primary"
                             styles = {{whiteSpace: 'normal', wordWrap:' break-word'}} 
@@ -110,27 +171,25 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                     <Col span={3}>
                         <div class = "textArea-wrapper" >
                             <Button block 
-                            onClick = {e => {copyToClipboard();  }}
-                            // onClick={ (e) =>  openNotification('Copied successfully')}
+                            onClick = {copyToClipboard}
                             >
                                 Copy It!
                             </Button>
                         </div>
                     </Col>
+                    <Col span={3}>
+                        <Row justify="space-around">
+                            Clickable
+                            <Switch defaultChecked onChange={onChange} /> 
+                            Text
+                        </Row>
+                        
+                    </Col>
                 </Row>
 
                 <Row>
-                <Col flex={1}  >
-                    <div class = "textArea-wrapper" >
-                        
-                         <TextArea  onChange={(e) => dispatch(textBoxLowerChange(e.target.value))} 
-                            ref={textAreaRef}
-                            value = {inputLower}   
-                            autoSize={{ minRows: 5, maxRows: 15 }}
-                        />
-                        
-                    </div>
-                </Col>
+                {LowerInput}
+                
             </Row>
         </Col>
     </Row>
@@ -142,6 +201,7 @@ const fixLinks = (input) => {
     let regexp = /aliexpress\.com\/item\/\d+\.html/g;
     // var linksFoundArray = input.matchAll(regexp);
     let linksFoundArray = [...input.matchAll(regexp)];
+    let fixedLinksArray = [];
     regexp = /.\.aliexpress\.com\/\_.+/g;
     let shareLinksFoundArray = [...input.matchAll(regexp)]; //share link looks like that https://a.aliexpress.com/_d9leh4R
     
@@ -151,16 +211,21 @@ const fixLinks = (input) => {
  
     linksFoundArray.map(link => {
         returnedString = returnedString + "https://www." + link[0] + '\n';
+        fixedLinksArray.push("https://www." + link[0]);
         console.log(link[0]);
     })
+
     const promises = shareLinksFoundArray.map(async link => {
         const url = await getUrlFromSharedLink("https://cors-anywhere.herokuapp.com/https://"+ link);
         return url;
     })
-    console.log(promises)
+    // console.log(promises)
+    console.log(fixedLinksArray)
+    
     promises.map(async promise => {
         const url = await promise;
-        console.log(url);
+        // console.log(url);
+        fixedLinksArray.push("https://" + url)
         shareLinksString = shareLinksString + "https://" + url + '\n';
         store.dispatch(textBoxLowerChange(returnedString + shareLinksString));
         // returnedString=returnedString+'\n'+url;

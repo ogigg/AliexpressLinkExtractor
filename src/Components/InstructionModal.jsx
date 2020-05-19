@@ -6,12 +6,7 @@ import '../App.css'
 
 
 const InstructionModal = (props) =>{
-    // const {
-    //     count: [open, setOpen]
-    //   } = {
-    //     count: useState(false),
-    //     ...(props.state || {})
-    //   };
+
     const [open, setOpen] = React.useState(props.open);
 
 
@@ -25,6 +20,7 @@ const InstructionModal = (props) =>{
 
     const handleClose = e => {
         setOpen(false);
+        props.setInstructionDialog(false)
         };
 
 
@@ -55,7 +51,7 @@ const InstructionModal = (props) =>{
         
         </div>
     );
-    };
+};
 
 
 export default InstructionModal;

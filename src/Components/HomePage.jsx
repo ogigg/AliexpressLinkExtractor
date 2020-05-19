@@ -32,7 +32,7 @@ var localState = {
     inputLower : ""
 };
 
-const unsubscribe = store.subscribe(
+const unsubscribe = store.subscribe( 
     () => {localState = (store.getState()); console.log(store.getState()); console.log(localState)}
     )
 
@@ -59,14 +59,9 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
         if(!Cookies.get('showInstruction')){ //if this is first visit on a page
             Cookies.set('showInstruction', true);
             console.log("Pokaz instrukcje");
-            showInstructions();
+            setInstructionDialog(true);
         }
         }, []);
-        
-    useEffect(() => {
-        console.log(instructionDialog)
-        setInstructionDialog(false);
-        }, [instructionDialog]);
 
     const showInstructions = () => {
         setInstructionDialog(true);
@@ -90,7 +85,6 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
         
       };
     const onChange = (e) => {
-        console.log(e);
         setTextbox(e);
     }
 
@@ -125,7 +119,9 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
     return(
     <Context.Provider value={{ name: 'Ant Design' }}> {contextHolder}
     <Row>
-        <InstructionModal open = {instructionDialog}></InstructionModal>
+        <InstructionModal open = {instructionDialog} 
+        setInstructionDialog = {setInstructionDialog}
+        ></InstructionModal>
         <Col flex={1}   >
             <Row justify="center" >
                 <Col flex={1} >

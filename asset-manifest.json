@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/AliexpressLinkExtractor/static/css/main.51466528.chunk.css",
+    "main.js": "/AliexpressLinkExtractor/static/js/main.dda5f6a4.chunk.js",
+    "main.js.map": "/AliexpressLinkExtractor/static/js/main.dda5f6a4.chunk.js.map",
+    "runtime-main.js": "/AliexpressLinkExtractor/static/js/runtime-main.24a67484.js",
+    "runtime-main.js.map": "/AliexpressLinkExtractor/static/js/runtime-main.24a67484.js.map",
+    "static/css/2.1bd2ab2f.chunk.css": "/AliexpressLinkExtractor/static/css/2.1bd2ab2f.chunk.css",
+    "static/js/2.3674db35.chunk.js": "/AliexpressLinkExtractor/static/js/2.3674db35.chunk.js",
+    "static/js/2.3674db35.chunk.js.map": "/AliexpressLinkExtractor/static/js/2.3674db35.chunk.js.map",
+    "index.html": "/AliexpressLinkExtractor/index.html",
+    "precache-manifest.8cd6e05421188157b983290acf921a05.js": "/AliexpressLinkExtractor/precache-manifest.8cd6e05421188157b983290acf921a05.js",
+    "service-worker.js": "/AliexpressLinkExtractor/service-worker.js",
+    "static/css/2.1bd2ab2f.chunk.css.map": "/AliexpressLinkExtractor/static/css/2.1bd2ab2f.chunk.css.map",
+    "static/css/main.51466528.chunk.css.map": "/AliexpressLinkExtractor/static/css/main.51466528.chunk.css.map",
+    "static/js/2.3674db35.chunk.js.LICENSE.txt": "/AliexpressLinkExtractor/static/js/2.3674db35.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.24a67484.js",
+    "static/css/2.1bd2ab2f.chunk.css",
+    "static/js/2.3674db35.chunk.js",
+    "static/css/main.51466528.chunk.css",
+    "static/js/main.dda5f6a4.chunk.js"
+  ]
+}

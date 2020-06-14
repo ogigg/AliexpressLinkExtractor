@@ -19,8 +19,9 @@ const InstructionModal = (props) =>{
       
 
     const handleClose = e => {
-        setOpen(false);
-        props.setInstructionDialog(false)
+        window.close();
+        // setOpen(false);
+        // props.setInstructionDialog(false)
         };
 
 

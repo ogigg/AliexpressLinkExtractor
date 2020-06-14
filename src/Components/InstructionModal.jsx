@@ -17,11 +17,12 @@ const InstructionModal = (props) =>{
       }, [props.open]);
 
       
-
-    const handleClose = e => {
-        window.close();
-        // setOpen(false);
-        // props.setInstructionDialog(false)
+    const handleCancel = () =>{
+        window.location.href = 'https://www.google.com/';
+    }
+    const handleClose = () => {
+        setOpen(false);
+        props.setInstructionDialog(false)
         };
 
 
@@ -32,7 +33,7 @@ const InstructionModal = (props) =>{
           title="Manual / Instrukcja użytkowania"
           visible={open}
           onOk={handleClose}
-          onCancel={handleClose}
+          onCancel={handleCancel}
           className = "modal"
 
         >

@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3918d1926a623aebaecdd6c51a8e7ada",
+    "revision": "087fc6d69d11f772e09cc837262a1f7f",
     "url": "/AliexpressLinkExtractor/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/AliexpressLinkExtractor/static/css/2.4c6ee7a4.chunk.css"
   },
   {
-    "revision": "0bf209fccf48c21b6a81",
+    "revision": "cc437372c19fe1e6a4ca",
     "url": "/AliexpressLinkExtractor/static/css/main.b8a1a983.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/AliexpressLinkExtractor/static/js/2.a9a199b5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0bf209fccf48c21b6a81",
-    "url": "/AliexpressLinkExtractor/static/js/main.0be1e2b4.chunk.js"
+    "revision": "cc437372c19fe1e6a4ca",
+    "url": "/AliexpressLinkExtractor/static/js/main.d2babe03.chunk.js"
   },
   {
     "revision": "969ab81c4625655b113d",

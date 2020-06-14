@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/AliexpressLinkExtractor/precache-manifest.7c5dedac69417fc0e96bc30737282301.js"
+  "/AliexpressLinkExtractor/precache-manifest.b27b32e71004128d1b1f5f1a82cb2b0f.js"
 );
 
 self.addEventListener('message', (event) => {

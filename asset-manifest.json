@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/AliexpressLinkExtractor/static/css/main.b8a1a983.chunk.css",
-    "main.js": "/AliexpressLinkExtractor/static/js/main.ca64111d.chunk.js",
-    "main.js.map": "/AliexpressLinkExtractor/static/js/main.ca64111d.chunk.js.map",
+    "main.js": "/AliexpressLinkExtractor/static/js/main.0be1e2b4.chunk.js",
+    "main.js.map": "/AliexpressLinkExtractor/static/js/main.0be1e2b4.chunk.js.map",
     "runtime-main.js": "/AliexpressLinkExtractor/static/js/runtime-main.5390d56c.js",
     "runtime-main.js.map": "/AliexpressLinkExtractor/static/js/runtime-main.5390d56c.js.map",
     "static/css/2.4c6ee7a4.chunk.css": "/AliexpressLinkExtractor/static/css/2.4c6ee7a4.chunk.css",
     "static/js/2.a9a199b5.chunk.js": "/AliexpressLinkExtractor/static/js/2.a9a199b5.chunk.js",
     "static/js/2.a9a199b5.chunk.js.map": "/AliexpressLinkExtractor/static/js/2.a9a199b5.chunk.js.map",
     "index.html": "/AliexpressLinkExtractor/index.html",
-    "precache-manifest.37ee60e7040e860d810cdbabf74ef7e5.js": "/AliexpressLinkExtractor/precache-manifest.37ee60e7040e860d810cdbabf74ef7e5.js",
+    "precache-manifest.7c5dedac69417fc0e96bc30737282301.js": "/AliexpressLinkExtractor/precache-manifest.7c5dedac69417fc0e96bc30737282301.js",
     "service-worker.js": "/AliexpressLinkExtractor/service-worker.js",
     "static/css/2.4c6ee7a4.chunk.css.map": "/AliexpressLinkExtractor/static/css/2.4c6ee7a4.chunk.css.map",
     "static/css/main.b8a1a983.chunk.css.map": "/AliexpressLinkExtractor/static/css/main.b8a1a983.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.4c6ee7a4.chunk.css",
     "static/js/2.a9a199b5.chunk.js",
     "static/css/main.b8a1a983.chunk.css",
-    "static/js/main.ca64111d.chunk.js"
+    "static/js/main.0be1e2b4.chunk.js"
   ]
 }

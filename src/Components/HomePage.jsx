@@ -162,7 +162,7 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                     {/* <Col span={15} > */}
                     <Col xs={{ span: 5, offset: 0 }} lg={{ span: 15 }} flex="auto">
                         <div class = "textArea-wrapper" >
-                            <Button block type="primary"
+                            <Button block type="primary" style = {{minWidth : '70px'}}
                             styles = {{whiteSpace: 'normal', wordWrap:' break-word'}} 
                             onClick = {e => handleClick()} >Fix it!</Button>
                         </div>
@@ -170,7 +170,7 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                     {/* <Col span={3}> */}
                     <Col xs={{ span: 5, offset: 0 }} lg={{ span: 3 }} flex="auto">
                         <div class = "textArea-wrapper" >
-                            <Button block  
+                            <Button block  style = {{minWidth : '70px'}}
                             onClick = {e => {dispatch(clear()); console.log(store.getState()); }}>
                                 Clear It!
                             </Button>
@@ -179,7 +179,7 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                     {/* <Col span={3}> */}
                     <Col xs={{ span: 5, offset: 0 }} lg={{ span: 3 }} flex="auto">
                         <div class = "textArea-wrapper" >
-                            <Button block 
+                            <Button block style = {{minWidth : '70px'}}
                             onClick = {copyToClipboard}
                             >
                                 Copy It!

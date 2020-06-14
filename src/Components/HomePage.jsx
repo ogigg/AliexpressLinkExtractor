@@ -22,10 +22,10 @@ import {
 import  InstructionModal  from './InstructionModal';
 import Cookies from 'js-cookie';
 import { Switch } from 'antd';
-
+import { Typography } from 'antd';
 const { TextArea } = Input;
 const Context = React.createContext({ name: 'Default' });
-
+const { Paragraph } = Typography;
 
 var localState = {        
     inputUpper : "",
@@ -69,7 +69,7 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
     }
     const copyToClipboard = () => {
         
-        let textToCopy = textAreaRef.current.state.value;
+        let textToCopy = inputLower;
         if(textToCopy.length>0){
             const textField = document.createElement('textarea');
             textField.innerText = textToCopy;
@@ -126,17 +126,25 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
             <Row justify="center" >
                 <Col flex={1} >
                     <PageHeader 
+                        style = {{whiteSpace: 'nowrap'}}
                         title = "Aliexpress Link Fixer" 
-                        subTitle="Just paste ugly aliexpress link and get beautiful one! Works for trashy links and links from app"
+                        // subTitle="Just paste ugly aliexpress link and get beautiful one! Works for links with garbage, referrals and trackers as well as links from app "
                         extra = {
                         <div >
+                            
                             <QuestionCircleOutlined className = "icon" 
                             onClick = {showInstructions}/>
                             <a href = 'https://github.com/ogigg/AliexpressLinkExtractor' className = "icon"><GithubOutlined/></a>
 
                         </div>
                         }
-                    />
+                    >
+                        <div style= {{whiteSpace: 'normal'}}>
+                            Just paste ugly aliexpress link and get beautiful one! Works for links with garbage, referrals and trackers as well as links from app
+                        </div>
+                        
+                        
+                    </PageHeader>
                 </Col>
                 </Row>
                 
@@ -151,14 +159,16 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                 </Row>
 
                 <Row justify="center" align="middle">
-                    <Col span={15} >
+                    {/* <Col span={15} > */}
+                    <Col xs={{ span: 5, offset: 0 }} lg={{ span: 15 }} flex="auto">
                         <div class = "textArea-wrapper" >
                             <Button block type="primary"
                             styles = {{whiteSpace: 'normal', wordWrap:' break-word'}} 
                             onClick = {e => handleClick()} >Fix it!</Button>
                         </div>
                     </Col>
-                    <Col span={3}>
+                    {/* <Col span={3}> */}
+                    <Col xs={{ span: 5, offset: 0 }} lg={{ span: 3 }} flex="auto">
                         <div class = "textArea-wrapper" >
                             <Button block  
                             onClick = {e => {dispatch(clear()); console.log(store.getState()); }}>
@@ -166,7 +176,8 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                             </Button>
                         </div>
                     </Col>
-                    <Col span={3}>
+                    {/* <Col span={3}> */}
+                    <Col xs={{ span: 5, offset: 0 }} lg={{ span: 3 }} flex="auto">
                         <div class = "textArea-wrapper" >
                             <Button block 
                             onClick = {copyToClipboard}
@@ -175,7 +186,8 @@ const HomePage = ({ dispatch, inputUpper, inputLower }) =>{
                             </Button>
                         </div>
                     </Col>
-                    <Col span={3}>
+                    {/* <Col span={3}> */}
+                    <Col xs={{ span: 8, offset: 0 }} lg={{ span: 3 }} flex="auto">
                         <Row justify="space-around">
                             Clickable
                             <Switch defaultChecked onChange={onChange} /> 

@@ -32,7 +32,8 @@ const InstructionModal = (props) =>{
           visible={open}
           onOk={handleClose}
           onCancel={handleClose}
-          width = '60vw'
+          className = "modal"
+
         >
         <p>Just paste ugly aliexpress link and get beautiful one! 
             Just paste ugly links into upper text box and click fix it!

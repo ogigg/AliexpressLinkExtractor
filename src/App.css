@@ -7,6 +7,11 @@
 .test{
   align-items: stretch;
 }
+.modal{
+  min-width: 60vw;
+}
+
+
 body > #root > div {
   height: 100vh;
 }
